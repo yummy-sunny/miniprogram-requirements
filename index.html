@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#EDF1F5">
+  <title>小程序需求配置</title>
+  <style>
+    :root{--bg:#EDF1F5;--surface:#fff;--surface-2:#F5F7FA;--ink:#132033;--muted:#5A6678;--line:#D5DDE7;--primary:#1F4E79;--primary-line:#8FB0CF;--primary-soft:#E3ECF6;--on-primary:#fff;--warn-ink:#7A4A00;--warn-soft:#FFF3DC;--warn-line:#F0CF94}
+    @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0E141C;--surface:#161F2A;--surface-2:#1C2734;--ink:#E4EAF2;--muted:#97A3B5;--line:#2B3848;--primary:#8DB9E6;--primary-line:#4A6C8E;--primary-soft:#1B2F45;--on-primary:#0E141C;--warn-ink:#F4C77E;--warn-soft:#33270F;--warn-line:#5E4719}}
+    :root[data-theme="dark"]{color-scheme:dark;--bg:#0E141C;--surface:#161F2A;--surface-2:#1C2734;--ink:#E4EAF2;--muted:#97A3B5;--line:#2B3848;--primary:#8DB9E6;--primary-line:#4A6C8E;--primary-soft:#1B2F45;--on-primary:#0E141C;--warn-ink:#F4C77E;--warn-soft:#33270F;--warn-line:#5E4719}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",sans-serif;padding:28px 16px 104px}.wrap{max-width:1100px;margin:auto}h1{font-size:clamp(26px,4.4vw,34px);line-height:1.25;margin:6px 0 8px;letter-spacing:.02em;text-wrap:balance}.lead{color:var(--muted);margin:0;max-width:42em}.layout{display:grid;gap:20px;margin-top:24px}@media(min-width:960px){.layout{grid-template-columns:minmax(0,1fr) 360px;align-items:start;gap:28px}aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);max-height:calc(100dvh - 40px);overflow:auto;scrollbar-width:thin}.bar{display:none!important}body{padding-block:40px 48px}}
+    .panel,.slip,.overview{background:var(--surface);border:1px solid var(--line);border-radius:14px}.q{padding:22px 20px;border-top:1px solid var(--line);scroll-margin-top:16px}.q:first-child{border-top:0}.q-head{display:flex;gap:10px;align-items:baseline;margin-bottom:4px}.q-no{min-width:1.5em;font-size:14px;font-weight:700;color:var(--primary);font-variant-numeric:tabular-nums}.q h2{font-size:17px;line-height:1.4;margin:0}.hint{font-size:13px;color:var(--muted);margin:0 0 0 calc(1.5em + 10px)}.q-body{margin-top:14px;display:grid;gap:14px}.sub-label{font-size:13px;font-weight:600;color:var(--muted);margin:0}
+    .opts{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}.opts.cats{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.opt{position:relative;display:block;cursor:pointer}.opt input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}.opt .box{display:flex;flex-direction:column;gap:2px;height:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);transition:border-color .15s,background-color .15s}.opt:hover .box{border-color:var(--primary-line)}.opt input:checked+.box{border-color:var(--primary);background:var(--primary-soft);box-shadow:inset 0 0 0 1px var(--primary)}.opt input:focus-visible+.box{outline:2px solid var(--primary);outline-offset:2px}.opt .t{font-weight:600}.opt .d{font-size:13px;line-height:1.5;color:var(--muted)}.chips{display:flex;flex-wrap:wrap;gap:8px}.chips .box{padding:7px 16px;border-radius:999px;flex-direction:row}.checks{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}.check .box{flex-direction:row;align-items:center;gap:10px;padding:10px 12px}.check .mark{flex:none;width:18px;height:18px;border-radius:5px;border:1.5px solid var(--primary-line);display:grid;place-items:center;color:var(--on-primary);font-size:12px;line-height:1}.check input:checked+.box .mark{background:var(--primary);border-color:var(--primary)}.check input:checked+.box .mark:after{content:"✓"}.check .txt{display:flex;flex-direction:column;flex:1;min-width:0}.check .t{font-size:14px}.check .d{font-size:12px}.included{font-size:12.5px;color:var(--muted);margin:0}
+    textarea{width:100%;min-height:96px;resize:vertical;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink);font:inherit;font-size:14px}textarea:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+    .section{margin-top:20px;padding:20px}.section h2{font-size:18px;line-height:1.4;margin:0 0 12px}.section-intro{font-size:13px;color:var(--muted);margin:-5px 0 14px}.ov-grid{display:grid;grid-template-columns:1fr;gap:16px}.ov-cat h3{font-size:15px;margin:0 0 8px}.ov-list{display:grid;gap:6px}.ov-row{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;padding:9px 11px;text-align:left;font:inherit;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:9px;cursor:pointer}.ov-row:hover{border-color:var(--primary-line);background:var(--primary-soft)}.ov-name{font-weight:600}.ov-desc{font-size:12px;color:var(--muted);text-align:right}.slip{padding:22px 20px}.slip h2{font-size:18px;margin:0 0 12px}.selected{margin:0;padding-left:20px;font-size:14px}.selected li{margin:4px 0}.empty{color:var(--muted);font-size:13px;margin:0}.rule{border:0;border-top:1px dashed var(--line);margin:16px 0}.meta{display:grid;gap:10px;margin:0}.meta dt{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--muted)}.meta dd{margin:2px 0 0;font-size:14px}.notes{padding-left:20px;margin:14px 0 0;font-size:13px}.notes li{margin:6px 0}.notes .warn{color:var(--warn-ink);background:var(--warn-soft);border:1px solid var(--warn-line);border-radius:8px;padding:8px 10px;list-style-position:inside}
+    .copy{width:100%;border:1px solid var(--primary);border-radius:9px;padding:11px 14px;background:var(--primary);color:var(--on-primary);font:inherit;font-weight:700;cursor:pointer}.copy:hover{filter:brightness(1.06)}.copy:focus-visible{outline:2px solid var(--primary);outline-offset:3px}.copy-hint{font-size:12.5px;color:var(--muted);margin:10px 0 0}.included-list{display:grid;gap:8px;padding:0;margin:0;list-style:none}.included-list li,.steps li{font-size:14px}.included-list li:before{content:"✓ ";color:var(--primary);font-weight:700}.steps{display:grid;gap:7px;padding:0 0 0 22px;margin:0}.bar{position:fixed;z-index:5;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line)}.toast{position:fixed;z-index:10;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,12px);max-width:calc(100% - 32px);padding:11px 16px;background:var(--ink);color:var(--surface);border-radius:9px;font-size:14px;text-align:center;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:540px){body{padding-top:24px}.q{padding:19px 16px}.opts{grid-template-columns:1fr 1fr}.opts.cats{grid-template-columns:1fr 1fr}.opt .box{padding:11px 12px}.check .box{padding:9px}.ov-row{align-items:flex-start;flex-direction:column;gap:2px}.ov-desc{text-align:left}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>小程序需求配置</h1>
+      <p class="lead">根据你的实际需求选择对应功能，选好后复制需求清单发给我，我会按你的需求出正式报价单。</p>
+    </header>
+    <div class="layout">
+      <div>
+        <form id="form" class="panel">
+          <section class="q" id="q-cat"><div class="q-head"><span class="q-no">1</span><h2>属于哪一类？</h2></div><div class="opts cats" id="catOpts"></div></section>
+          <section class="q" id="q-type" hidden><div class="q-head"><span class="q-no">2</span><h2>具体想做哪种？</h2></div><div class="q-body"><div class="opts" id="typeOpts"></div></div></section>
+          <section class="q" id="q-level" hidden><div class="q-head"><span class="q-no">3</span><h2>功能想做到什么程度？</h2></div><div class="opts" id="levelOpts"></div></section>
+          <section class="q" id="q-version" hidden><div class="q-head"><span class="q-no">4</span><h2>微信认证、备案这些上线手续，谁来办？</h2></div><div class="opts" id="versionOpts"></div></section>
+          <section class="q" id="q-addon" hidden><div class="q-head"><span class="q-no">5</span><h2>还要加别的功能吗？（可多选）</h2></div><div class="q-body"><div class="checks" id="addonOpts"></div><p class="included" id="includedNote" hidden></p><p class="sub-label">零碎小功能大概有几个？</p><div class="chips" id="extraOpts"></div></div></section>
+          <section class="q" id="q-maint" hidden><div class="q-head"><span class="q-no">6</span><h2>需要延长维护期吗？</h2></div><div class="chips" id="maintOpts"></div></section>
+          <section class="q" id="q-users" hidden><div class="q-head"><span class="q-no">6</span><h2>大概有多少人用？</h2></div><div class="chips" id="usersOpts"></div></section>
+          <section class="q" id="q-license" hidden><div class="q-head"><span class="q-no">7</span><h2>有营业执照吗？</h2></div><div class="chips" id="licenseOpts"></div></section>
+          <section class="q" id="q-note"><div class="q-head"><span class="q-no">8</span><h2>还有什么想补充的？（选填）</h2></div><div class="q-body"><textarea id="note" placeholder="比如：参考哪个小程序、想什么时候上线、有没有特别要求"></textarea></div></section>
+        </form>
+        <section class="overview section" id="overview">
+          <h2>全部类型参考</h2>
+          <p class="section-intro">选大类和具体类型，再回答几个问题。点任意一行可以直接选择。</p>
+          <div class="ov-grid" id="ovGrid"></div>
+        </section>
+        <section class="panel section">
+          <h2>每一单都包含</h2>
+          <ul class="included-list">
+            <li>需求梳理，列功能清单确认</li><li>设计两版页面，选定风格</li><li>全部功能开发</li><li>发测试版扫码试用，改到满意</li><li>协助上线</li><li>半年售后：小调整免费，bug 不限时修</li><li>源码交付</li><li>可开发票</li>
+          </ul>
+          <hr class="rule"><h2>合作流程</h2>
+          <ol class="steps"><li>平台担保下单</li><li>按资料清单准备营业执照、法人信息、小程序名称和 logo</li><li>提交微信认证和备案，法人配合扫脸，审核约 7~20 个工作日</li><li>确认功能清单，设计两版页面选风格</li><li>开发全部功能（和备案审核同时进行），发测试版试用修改</li><li>满意后确认收货，备案通过即上线</li></ol>
+        </section>
+      </div>
+      <aside>
+        <section class="slip" id="quote">
+          <h2>当前选择</h2><ul class="selected" id="selectedList"></ul><p class="empty" id="emptyState">选择后会在这里显示已选内容。</p>
+          <hr class="rule"><dl class="meta" id="metaWrap"></dl><ul class="notes" id="notes" hidden></ul>
+          <hr class="rule"><button class="copy" id="copyBtn" type="button">复制需求清单</button><p class="copy-hint" id="copyHint">复制后发给我，我按你的需求出正式报价单。</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <div class="bar" id="bar"><button class="copy" id="copyBtnMobile" type="button">复制需求清单</button></div>
+  <div class="toast" id="toast" role="status" aria-live="polite">已复制，请发送给我，我按你的需求出正式报价单</div>
+  <script>
+  (()=>{
+    const CATS=[
+      {id:'shop',name:'电商零售',desc:'卖货、商城、团购',types:[
+        {id:'display',name:'商品展示',desc:'产品图册、分类、详情，电话或客服咨询，不在线收款',days:'3~5 天'},
+        {id:'store',name:'单店商城（同城配送/自提）',desc:'上架商品、购物车、下单付款、填地址、订单管理',days:'4~7 天',pay:true},
+        {id:'express',name:'快递发货商城',desc:'规格库存、快递发货、物流查询、改价做活动、商家管理入口',days:'约 1 周',pay:true},
+        {id:'promo',name:'营销商城（拼团/秒杀）',desc:'快递商城 + 拼团、秒杀、优惠券、满减',days:'1~2 周',pay:true,inc:['coupon']},
+        {id:'distrib',name:'分销会员商城',desc:'商城 + 会员等级、积分、推广佣金、提现',days:'2~3 周',pay:true,inc:['member','distrib'],note:'distrib'},
+        {id:'group',name:'社区团购',desc:'团长管理、自提点、按批次截单、汇总配送',days:'2~4 周',pay:true,inc:['roles','report']},
+        {id:'mall',name:'多商户入驻平台',desc:'商家入驻审核、各自管理商品订单、平台抽佣结算',days:'3~5 周',pay:true,inc:['multi','roles','report']}]},
+      {id:'food',name:'餐饮外卖',desc:'扫码点餐、外卖、连锁',types:[
+        {id:'dinein',name:'扫码点餐（堂食）',desc:'桌码点餐、规格加料、下单付款、后厨和前台看单',days:'约 1 周',pay:true},
+        {id:'takeout',name:'外卖点单（自己配送）',desc:'菜品规格、配送范围和配送费、下单付款、新订单提醒',days:'约 1 周',pay:true,inc:['notify']},
+        {id:'combo',name:'堂食 + 外卖 + 会员',desc:'扫码点餐、外卖、会员储值、优惠券一体',days:'2~3 周',pay:true,inc:['member','coupon','notify']},
+        {id:'chain',name:'多门店连锁',desc:'选门店、各店菜单订单分开管理、总部汇总',days:'3~4 周',pay:true,inc:['multi','roles','report']}]},
+      {id:'life',name:'本地生活服务',desc:'到店、上门、同城',types:[
+        {id:'ticket',name:'团购券/票务核销',desc:'发布票券、在线购买、核销码、到店扫码核销',days:'约 1 周',pay:true},
+        {id:'appoint',name:'门店预约（美业/理疗/摄影）',desc:'选服务、选技师、选时间段、预约提醒',days:'约 1 周',pay:true,inc:['notify']},
+        {id:'vip',name:'会员储值卡',desc:'会员卡、充值、消费扣款、积分',days:'约 1 周',pay:true,inc:['member']},
+        {id:'house',name:'房源/车源展示',desc:'房源发布、按区域价格户型筛选、地图位置、预约看房',days:'1~2 周'},
+        {id:'info',name:'同城信息发布（招聘/租房/二手）',desc:'用户发帖、分类筛选、审核、置顶收费',days:'1~2 周',pay:true,note:'ugc'},
+        {id:'dispatch',name:'上门服务派单（家政/维修）',desc:'用户下单、后台派单、师傅端接单、完工确认',days:'2~3 周',pay:true,inc:['notify','roles']},
+        {id:'order',name:'双端接单平台（陪玩/跑腿）',desc:'用户端下单、服务者端接单、在线客服、消息提醒',days:'约 2 周',pay:true,inc:['chat','notify']}]},
+      {id:'book',name:'预约预订',desc:'报名、场地、酒店、景区',types:[
+        {id:'event',name:'活动报名',desc:'活动发布、报名表、缴费、签到',days:'约 1 周',pay:true},
+        {id:'venue',name:'场地预约（球馆/自习室/会议室）',desc:'按时段预约、占用状态、付款、到场核销',days:'约 1 周',pay:true},
+        {id:'clinic',name:'诊所/机构挂号预约',desc:'科室医生、排班、挂号预约、就诊提醒',days:'1~2 周',inc:['notify'],note:'medical'},
+        {id:'scenic',name:'景区门票 + 语音导览',desc:'门票、景点地图定位、语音讲解',days:'1~2 周',pay:true,inc:['gps']},
+        {id:'hotel',name:'酒店/民宿预订',desc:'房源展示、房态日历、预订收定金、改价、分享给中介',days:'1~2 周',pay:true}]},
+      {id:'edu',name:'教育培训',desc:'课程、题库、直播',types:[
+        {id:'course',name:'课程展示 + 报名',desc:'课程和老师介绍、在线报名缴费',days:'约 1 周',pay:true},
+        {id:'live',name:'直播上课',desc:'直播、公屏互动、回放',days:'1~2 周',inc:['live'],note:'live'},
+        {id:'video',name:'录播网课',desc:'视频课程、购买解锁、学习进度',days:'1~2 周',pay:true,note:'edu'},
+        {id:'bank',name:'题库刷题',desc:'导入题库、分类练习、错题本、学员账号',days:'约 2 周'},
+        {id:'school',name:'家校/班级管理',desc:'通知、作业、打卡、成绩',days:'2~3 周',inc:['roles','notify']},
+        {id:'exam',name:'模拟考试',desc:'随机组卷、打乱顺序、计时交卷、成绩统计',days:'约 2 周',inc:['report']},
+        {id:'eduall',name:'教育综合平台',desc:'直播 + 题库 + 网课 + 考试公告 + AI 答疑规划',days:'3~4 周',pay:true,inc:['live','ai'],note:'live'}]},
+      {id:'office',name:'企业办公',desc:'内部工具、登记、管理',types:[
+        {id:'ledger',name:'信息录入台账',desc:'录入、查询筛选、一键拨号、老板授权员工使用',days:'约 1 周',inc:['roles']},
+        {id:'attend',name:'考勤打卡/排班',desc:'定位打卡、排班、请假、统计',days:'约 1 周',inc:['gps','report']},
+        {id:'field',name:'外勤登记统计',desc:'拍照打卡、分类登记、多角色查看、按地区和月/年汇总',days:'约 1 周',inc:['roles','report']},
+        {id:'workorder',name:'工单报修/审批',desc:'提交工单、指派处理、进度跟踪、审批流',days:'1~2 周',inc:['roles','notify']},
+        {id:'stock',name:'进销存/库存',desc:'入库出库、库存预警、销售记录、报表',days:'2~3 周',inc:['report']},
+        {id:'crm',name:'客户管理 CRM',desc:'客户档案、跟进记录、销售阶段、到期提醒',days:'2~3 周',inc:['notify','report']}]},
+      {id:'show',name:'展示与小工具',desc:'官网、名片、表单、查询',types:[
+        {id:'vcard',name:'电子名片/个人主页',desc:'个人介绍、联系方式、作品展示',days:'2~3 天'},
+        {id:'site',name:'企业官网/品牌展示',desc:'公司介绍、案例、新闻、联系方式',days:'3~5 天'},
+        {id:'form',name:'表单登记/问卷',desc:'自定义表单、提交收集、导出表格',days:'3~5 天',inc:['report']},
+        {id:'query',name:'查询工具（成绩/证书/物流）',desc:'导入数据、按条件查询结果',days:'3~5 天'},
+        {id:'rank',name:'积分排名/赛事排行',desc:'微信登录、排行榜、后台调分、奖励周期清零',days:'3~5 天'},
+        {id:'vote',name:'抽奖/投票/助力活动',desc:'活动配置、投票或抽奖、防刷票',days:'约 1 周'}]},
+      {id:'iot',name:'物联网设备',desc:'扫码设备、硬件数据',types:[
+        {id:'charge',name:'扫码充电/共享设备',desc:'扫码、选设备、付款使用、订单后台',days:'1~2 周',pay:true,note:'device'},
+        {id:'vending',name:'自助售货/洗车等设备控制',desc:'扫码下单、远程控制设备、状态回传',days:'2~4 周',pay:true,note:'device'},
+        {id:'wear',name:'智能穿戴/传感器数据',desc:'手环、传感器数据读取，实时展示和历史记录',days:'4~5 周',note:'device'}]},
+      {id:'social',name:'社交内容',desc:'资讯、社区、付费内容',types:[
+        {id:'news',name:'资讯/内容发布',desc:'文章或视频发布、分类、评论',days:'约 1 周'},
+        {id:'paid',name:'知识付费/付费社群',desc:'付费文章、音频、视频，会员订阅',days:'1~2 周',pay:true,inc:['member']},
+        {id:'forum',name:'社区论坛',desc:'用户发帖、评论点赞、关注、审核举报',days:'2~3 周',inc:['notify'],note:'ugc'},
+        {id:'dating',name:'婚恋交友',desc:'资料认证、条件筛选、匹配、私信聊天',days:'3~4 周',pay:true,inc:['chat'],note:'dating'}]},
+      {id:'ai',name:'AI 与软件工具',desc:'AI 应用、APP、电脑软件',types:[
+        {id:'tool',name:'办公自动化小软件',desc:'表格批量处理、文件整理，装在电脑上用',days:'2~5 天',app:true},
+        {id:'aiapp',name:'个人 AI 助手 APP',desc:'录入信息、调大模型生成文字、数据存本地',days:'2 天~1 周',app:true,inc:['ai']},
+        {id:'aibatch',name:'AI 批量处理电脑软件',desc:'导入表格、按提示词批量生成、导出结果',days:'2~5 天',app:true,inc:['ai']},
+        {id:'aibot',name:'AI 客服/智能体小程序',desc:'接入大模型、知识库问答、对话记录',days:'1~2 周',inc:['ai']}]}
+    ];
+    const ADDONS=[
+      {id:'pay',name:'在线支付收款',desc:'微信支付，钱进自己账户'},
+      {id:'notify',name:'消息提醒',desc:'下单、预约、到期提醒'},
+      {id:'report',name:'数据统计/导出表格',desc:'按日/月汇总，导出 Excel',app:true},
+      {id:'roles',name:'多角色权限',desc:'老板、员工、客户各看各的'},
+      {id:'gps',name:'定位/GPS 轨迹',desc:'打卡定位、路线记录'},
+      {id:'member',name:'会员积分/储值',desc:'会员等级、积分、充值'},
+      {id:'coupon',name:'优惠券/满减/秒杀',desc:'营销活动'},
+      {id:'chat',name:'在线客服/私信',desc:'用户和商家实时聊天'},
+      {id:'ai',name:'AI 智能问答',desc:'接入 DeepSeek、豆包等',app:true},
+      {id:'web',name:'电脑网页版后台',desc:'在电脑浏览器里管理'},
+      {id:'live',name:'直播',desc:'直播间、公屏互动'},
+      {id:'distrib',name:'分销推广佣金',desc:'推广员拉新拿佣金、提现'},
+      {id:'multi',name:'多门店/多商户',desc:'各店分开管理、总部汇总'},
+      {id:'ext',name:'对接外部系统',desc:'收银、ERP、库存系统等，需评估',app:true}
+    ];
+    const LEVELS=[{v:'simple',t:'简单够用',d:'先上核心功能，页面简洁'},{v:'standard',t:'标准',d:'常见功能都齐全'},{v:'full',t:'功能完整',d:'功能多、细节多、要求高'}];
+    const VERSION=[{v:'basic',t:'我自己办，你们指导',d:'基础版：按教程自己操作认证、备案'},{v:'full',t:'全部交给你们',d:'全包版：只需提供资料、配合扫脸'},{v:'unsure',t:'还没想好',d:''}];
+    const EXTRA=[{v:'none',t:'不用加'},{v:'few',t:'1~2 个'},{v:'some',t:'3~5 个'},{v:'many',t:'6 个以上'}];
+    const USERS=[{v:'small',t:'200 人以内'},{v:'mid',t:'几百到几千人'},{v:'large',t:'上万人'}];
+    const LICENSE=[{v:'yes',t:'有'},{v:'doing',t:'正在办'},{v:'no',t:'还没有'}];
+    const MAINT=[{v:'m3',t:'3 个月（已含）'},{v:'m6',t:'半年'},{v:'y1',t:'一年'},{v:'long',t:'长期'}];
+    const NOTES={ugc:'用户能自己发内容的小程序，一般要企业主体，并且要做内容审核。',medical:'医疗类目需要医疗机构执业许可证等资质，提交前先确认。',edu:'部分教育类目审核会看营业执照经营范围，个别需要额外资质。',live:'小程序直播要开通对应类目，部分行业需要额外资质。',distrib:'分销层级建议控制在两级以内，微信禁止多级分销。',device:'需要设备厂家提供对接接口或通信协议，报价前先确认。',dating:'婚恋交友类目审核较严，可能需要相关经营资质。',ext:'对接外部系统要先确认对方有开放接口，评估后单独报价。'};
+    const TYPES=CATS.flatMap(c=>c.types.map(t=>Object.assign(t,{cat:c})));const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const S={cat:null,type:null,level:null,version:null,addons:new Set(),extra:null,users:null,license:null,maint:null};
+    function card(kind,name,id,value,title,desc,checked){return '<label class="opt"><input type="'+kind+'" name="'+name+'" id="'+id+'" value="'+esc(value)+'"'+(checked?' checked':'')+'><span class="box"><span class="t">'+esc(title)+'</span>'+(desc?'<span class="d">'+esc(desc)+'</span>':'')+'</span></label>'}
+    function chip(name,o){return '<label class="opt"><input type="radio" name="'+name+'" id="'+name+'-'+o.v+'" value="'+o.v+'"><span class="box"><span class="t">'+esc(o.t)+'</span></span></label>'}
+    $('#catOpts').innerHTML=CATS.map(c=>card('radio','cat','cat-'+c.id,c.id,c.name,c.desc,false)).join('');
+    $('#levelOpts').innerHTML=LEVELS.map(o=>card('radio','level','level-'+o.v,o.v,o.t,o.d,false)).join('');
+    $('#versionOpts').innerHTML=VERSION.map(o=>card('radio','version','version-'+o.v,o.v,o.t,o.d,false)).join('');
+    $('#extraOpts').innerHTML=EXTRA.map(o=>chip('extra',o)).join('');$('#usersOpts').innerHTML=USERS.map(o=>chip('users',o)).join('');$('#licenseOpts').innerHTML=LICENSE.map(o=>chip('license',o)).join('');$('#maintOpts').innerHTML=MAINT.map(o=>chip('maint',o)).join('');
+    $('#ovGrid').innerHTML=CATS.map(c=>'<section class="ov-cat"><h3>'+esc(c.name)+'</h3><div class="ov-list">'+c.types.map(t=>'<button type="button" class="ov-row" data-type="'+t.id+'"><span class="ov-name">'+esc(t.name)+'</span><span class="ov-desc">'+esc(t.desc)+'</span></button>').join('')+'</div></section>').join('');
+    const curType=()=>TYPES.find(t=>t.id===S.type)||null;
+    const visibleAddons=t=>ADDONS.filter(a=>t&&!((t.inc||[]).includes(a.id))&&!(a.id==='pay'&&t.pay)&&!(t.app&&!a.app));
+    const activeAddons=t=>visibleAddons(t).filter(a=>S.addons.has(a.id));
+    function renderTypes(){const c=CATS.find(x=>x.id===S.cat);$('#typeOpts').innerHTML=c?c.types.map(t=>card('radio','type','type-'+t.id,t.id,t.name,t.desc,S.type===t.id)).join(''):''}
+    function renderAddons(){const t=curType(),list=visibleAddons(t);$('#addonOpts').innerHTML=list.map(a=>'<label class="opt check"><input type="checkbox" name="addon" id="addon-'+a.id+'" value="'+a.id+'"'+(S.addons.has(a.id)?' checked':'')+'><span class="box"><span class="mark"></span><span class="txt"><span class="t">'+esc(a.name)+'</span><span class="d">'+esc(a.desc)+'</span></span></span></label>').join('');const inc=t?ADDONS.filter(a=>(t.inc||[]).includes(a.id)||(a.id==='pay'&&t.pay)).map(a=>a.name):[];$('#includedNote').hidden=!inc.length;$('#includedNote').textContent=inc.length?'已自带：'+inc.join('、'):''}
+    function update(){const t=curType(),isMP=t&&!t.app,show=(id,on)=>$(id).hidden=!on;show('#q-type',!!S.cat);show('#q-level',!!t);show('#q-version',!!isMP);show('#q-addon',!!t);show('#q-maint',!!t&&!!t.app);show('#q-users',!!isMP);show('#q-license',!!isMP);let n=0;document.querySelectorAll('#form .q').forEach(q=>{if(!q.hidden)q.querySelector('.q-no').textContent=++n});renderSummary();return {t,isMP}}
+    function selectedAnswers(){const c=CATS.find(x=>x.id===S.cat),t=curType(),out=[];const push=(q,n,v)=>{if(v)out.push({q,n,v})};push('q-cat','属于哪一类？',c?.name);push('q-type','具体想做哪种？',t?.name);push('q-level','功能想做到什么程度？',LEVELS.find(x=>x.v===S.level)?.t);push('q-version','微信认证、备案这些上线手续，谁来办？',t&&!t.app?VERSION.find(x=>x.v===S.version)?.t:null);if(t){const adds=activeAddons(t).map(a=>a.name);if(adds.length)out.push({q:'q-addon',n:'还要加别的功能吗？（可多选）',v:adds});const extra=EXTRA.find(x=>x.v===S.extra);if(extra)out.push({q:'q-addon',n:'零碎小功能大概有几个？',v:extra.t});}push('q-maint','需要延长维护期吗？',t?.app?MAINT.find(x=>x.v===S.maint)?.t:null);push('q-users','大概有多少人用？',t&&!t.app?USERS.find(x=>x.v===S.users)?.t:null);push('q-license','有营业执照吗？',t&&!t.app?LICENSE.find(x=>x.v===S.license)?.t:null);const note=$('#note').value;if(note.trim())out.push({q:'q-note',n:'还有什么想补充的？（选填）',v:note});return out}
+    function renderSummary(){const data=selectedAnswers(),list=$('#selectedList');list.innerHTML=data.map(a=>'<li><strong>'+esc(a.n)+'</strong><br>'+((Array.isArray(a.v)?a.v:[a.v]).map(esc).join('、'))+'</li>').join('');$('#emptyState').hidden=!!data.length;const t=curType();const timeline=$('#metaWrap');timeline.innerHTML=t?'<div><dt>预计工期</dt><dd>'+esc(t.app?t.days+'，不需要备案':'开发 '+t.days+'；备案审核 7~20 个工作日，和开发同时进行')+(S.level==='full'||activeAddons(t).length>=3?'（功能多会再长一些）':'')+'</dd></div>':'';const notes=[];if(t&&!t.app&&S.license==='no')notes.push({warn:true,text:'小程序上线必须有营业执照，经营类目要和小程序内容对得上。可以去当地市场监督管理局办，或找本地代办，一般一两天就能下来。'});if(t&&!t.app&&S.license==='doing')notes.push({text:'执照下来之前可以先确认功能、做页面设计，下来后马上提交备案。'});if(t?.note)notes.push({warn:true,text:NOTES[t.note]});activeAddons(t).forEach(a=>{if(NOTES[a.id]&&a.id!==t?.note)notes.push({warn:a.id==='ext',text:NOTES[a.id]})});if(t&&!t.app&&(t.pay||activeAddons(t).some(a=>a.id==='pay')))notes.push({text:'带在线收款的小程序必须备案，钱直接进你自己的账户。'});if(S.version==='full')notes.push({text:'全包版你只需要提供资料，配合扫码、扫脸就行。'});if(S.extra==='many'||activeAddons(t).length>=4)notes.push({text:'功能比较多，建议把想要的功能列个清单发我，按清单出正式报价。'});if(t&&!t.app&&S.users==='large')notes.push({text:'用户量大时服务器按实际访问量配置。'});if(t?.app)notes.push({text:'数据存在自己手机或电脑上，换设备可以帮你备份迁移。'});const ul=$('#notes');ul.innerHTML=notes.map(x=>'<li'+(x.warn?' class="warn"':'')+'>'+esc(x.text)+'</li>').join('');ul.hidden=!notes.length}
+    function requirementText(){const data=selectedAnswers(),lines=['【小程序开发需求单】'];data.forEach(a=>{const no=document.querySelector('#'+a.q+' .q-no').textContent;lines.push('');lines.push(no+'. '+a.n);(Array.isArray(a.v)?a.v:[a.v]).forEach(v=>lines.push('- '+v))});return lines.join('\n')}
+    function selectType(id){const t=TYPES.find(x=>x.id===id);if(!t)return;S.cat=t.cat.id;S.type=t.id;const ci=document.getElementById('cat-'+t.cat.id);if(ci)ci.checked=true;renderTypes();const ti=document.getElementById('type-'+t.id);if(ti)ti.checked=true;renderAddons();update()}
+    $('#form').addEventListener('change',e=>{const el=e.target;if(!el.name)return;if(el.name==='cat'){S.cat=el.value;S.type=null;renderTypes();renderAddons()}else if(el.name==='type'){S.type=el.value;renderAddons()}else if(el.name==='addon'){el.checked?S.addons.add(el.value):S.addons.delete(el.value)}else if(el.name in S)S[el.name]=el.value;update()});$('#form').addEventListener('submit',e=>e.preventDefault());
+    $('#ovGrid').addEventListener('click',e=>{const row=e.target.closest('.ov-row');if(!row)return;selectType(row.dataset.type);const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;$('#q-level').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})});
+    async function copyRequirements(){const text=requirementText();try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text)}else{throw new Error('clipboard unavailable')}}catch(e){const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';area.style.left='-9999px';document.body.appendChild(area);area.select();area.setSelectionRange(0,area.value.length);const ok=document.execCommand('copy');area.remove();if(!ok){$('#copyHint').textContent='复制失败，请稍后重试。';return}}const toast=$('#toast');toast.classList.add('show');clearTimeout(copyRequirements.timer);copyRequirements.timer=setTimeout(()=>toast.classList.remove('show'),2600)}
+    $('#copyBtn').addEventListener('click',copyRequirements);$('#copyBtnMobile').addEventListener('click',copyRequirements);$('#note').addEventListener('input',update);
+    try{const io=new IntersectionObserver(entries=>entries.forEach(en=>{$('#bar').style.visibility=en.isIntersecting?'hidden':'visible'}),{threshold:.15});io.observe($('#quote'))}catch(e){}
+    const cc=document.querySelector('input[name="cat"]:checked');if(cc){S.cat=cc.value;renderTypes()}update();
+  })();
+  </script>
+</body>
+</html>
